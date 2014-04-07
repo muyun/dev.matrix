@@ -8,16 +8,17 @@ import org.la4j.LinearAlgebra;
 import java.io.IOException;
 import java.util.Random;
 
-public class La4jPerformanceTestV2 implements RuntimePerformance {
-	
+public class La4jPerformanceTestV2 {
+	/*
 	@Override
 	public MatrixProcessorInterface add(){
 		return new Add();
 	}
+	*/
 	
-	public static class Add implements MatrixProcessorInterface {
-		@Override
-		public long process(TestMatrix[] inputs, TestMatrix[] outputs, long numTrials){
+	//public static class Add implements MatrixProcessorInterface {
+	//	@Override
+		public static long process(TestMatrix[] inputs, TestMatrix[] outputs, long numTrials){
 			Matrix a = inputs[0].getOriginal();
 			Matrix b = inputs[1].getOriginal();
 			
@@ -29,33 +30,41 @@ public class La4jPerformanceTestV2 implements RuntimePerformance {
                 C = a.add(b);
             }
 			
-			long elapsed = System.nanoTime() - prev;
+			long elapsed = System.currentTimeMillis() - prev;
             outputs[0] = new La4jTestMatrix(C);
             
             return elapsed;
 		}
-	}
-	/*
+	//}
+
 	public static void main(String args[]) throws Exception {
-		Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
-				   .shape(3,3) // 10x10 matrix
-				   .source(new Random())
-				   .buildSymmetric();
-		String stra = a.mkString(";", ",");
-		System.out.println("Matrix a is:" + stra);
-	 
-		a1 = new La4jTestMatrix(a);
-		
-		Matrix b = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
-				   .shape(3,3) // 10x10 matrix
-				   .source(new Random())
-				   .buildSymmetric();
-		String strb = b.mkString(";", ",");
-		System.out.println("Matrix b is:" + strb);
-		
-		La4jTestMatrix
-		
-		process();
-	}
-*/
+			Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
+					   .shape(2,2) // 10x10 matrix
+					   .source(new Random())
+					   .buildSymmetric();
+			
+			String stra = a.mkString(";", ",");
+			System.out.println("Matrix a is:" + stra);
+		 
+			TestMatrix[] inputs = new La4jTestMatrix[2];
+			inputs[0] =	new La4jTestMatrix(a);
+			
+			Matrix b = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
+					   .shape(100,100) // 10x10 matrix
+					   .source(new Random())
+					   .buildSymmetric();
+			
+			String strb = b.mkString(";", ",");
+			System.out.println("Matrix b is:" + strb);
+			
+			inputs[1] =	new La4jTestMatrix(b);
+			
+			TestMatrix[] outputs = new La4jTestMatrix[1];
+			
+			long t = process(inputs, outputs, 1000);
+			
+			System.out.println("la4j matrix sum = " + ( (double) t / 1000) + " s");
+		}
 }
+
+

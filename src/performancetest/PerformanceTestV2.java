@@ -38,7 +38,7 @@ public class PerformanceTestV2 implements RuntimePerformance {
 		}
 	}
 	
-	
+	/*
 	public static void main(String args[]) throws Exception {
 		Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
 				   .shape(3,3) // 10x10 matrix
@@ -66,4 +66,5 @@ public class PerformanceTestV2 implements RuntimePerformance {
 		
 		long t = Add.process(inputs, outputs, 100);
 	}
+	*/
 }

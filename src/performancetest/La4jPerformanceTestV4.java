@@ -5,17 +5,17 @@ import org.la4j.matrix.Matrices;
 import org.la4j.matrix.Matrix;
 import org.la4j.LinearAlgebra;
 
-import performancetest.PerformanceTestV2.Add;
+import performancetest.PerformanceTestV2;
 
 import java.io.IOException;
 import java.util.Random;
 
 
-public class La4jPerformanceTestV3 {
+public class La4jPerformanceTestV4 {
 	
 	public static void main(String args[]) throws Exception {
 		Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
-				   .shape(2,2) // 10x10 matrix
+				   .shape(3,3) // 10x10 matrix
 				   .source(new Random())
 				   .buildSymmetric();
 		
@@ -26,19 +26,19 @@ public class La4jPerformanceTestV3 {
 		inputs[0] =	new La4jTestMatrix(a);
 		
 		Matrix b = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
-				   .shape(2,2) // 10x10 matrix
+				   .shape(3,3) // 10x10 matrix
 				   .source(new Random())
 				   .buildSymmetric();
 		
 		String strb = b.mkString(";", ",");
 		System.out.println("Matrix b is:" + strb);
 		
-		inputs[1] =	new La4jTestMatrix(b);
+		inputs[1] =	new La4jTestMatrix(a);
 		
-		TestMatrix[] outputs = new La4jTestMatrix[1];
-		//long numTrials = 0;
+		La4jTestMatrix[] outputs;
+		long numTrials = 0;
 		
-		long t = Add.process(inputs, outputs, 3);
+		long t = process(inputs, outputs, 100);
 	}
 
 }
