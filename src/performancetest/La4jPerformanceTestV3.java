@@ -5,8 +5,6 @@ import org.la4j.matrix.Matrices;
 import org.la4j.matrix.Matrix;
 import org.la4j.LinearAlgebra;
 
-import performancetest.PerformanceTestV2.Add;
-
 import java.io.IOException;
 import java.util.Random;
 
@@ -22,7 +20,7 @@ public class La4jPerformanceTestV3 {
 		String stra = a.mkString(";", ",");
 		System.out.println("Matrix a is:" + stra);
 	 
-		La4jTestMatrix[] inputs;
+		TestMatrix[] inputs = new La4jTestMatrix[2];
 		inputs[0] =	new La4jTestMatrix(a);
 		
 		Matrix b = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
@@ -38,7 +36,11 @@ public class La4jPerformanceTestV3 {
 		TestMatrix[] outputs = new La4jTestMatrix[1];
 		//long numTrials = 0;
 		
-		long t = Add.process(inputs, outputs, 3);
+		PerformanceTest pt = new PerformanceTest();
+		long t = pt.add().process(inputs, outputs, 1000);
+		
+		System.out.println("la4j matrix sum = " + ( (double) t / 1000) + " s");
+		
 	}
 
 }
