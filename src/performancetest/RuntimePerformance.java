@@ -20,12 +20,12 @@ public interface RuntimePerformance {
     /**
      * Eigenvalue Decomposition
      */
-	//MatrixProcessorInterface eigSymm();
+	MatrixProcessorInterface eigSymm();
 
     /**
      * Computes the determinant of a matrix.
      */
-	//MatrixProcessorInterface det();
+	MatrixProcessorInterface det();
 
     /**
      * <p>
@@ -43,7 +43,7 @@ public interface RuntimePerformance {
      * C = A*B
      * </p>
      */
-	//MatrixProcessorInterface mult();
+	MatrixProcessorInterface mult();
 
     /**
      * <p>

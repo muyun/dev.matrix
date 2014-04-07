@@ -39,9 +39,24 @@ public class La4jPerformanceTestV3 {
 		TestMatrix[] outputs = new La4jTestMatrix[1];
 		
 		PerformanceTest pt = new PerformanceTest();
-		long t = pt.add().process(inputs, outputs, numTrials);
 		
-		System.out.println("La4j matrix (" + args[0] + "X" + args[0] + ") " + args[1] + " times = " + ( (double) t / 1000) + " s");
+		//addition
+		long addt = pt.add().process(inputs, outputs, numTrials);	
+		System.out.println("La4j matrix (" + args[0] + "X" + args[0] + ") " + args[1] + " times = " + ( (double) addt / 1000) + " s");
+		
+		//multiplication
+		long multt = pt.mult().process(inputs, outputs, numTrials);
+		System.out.println("La4j matrix (" + args[0] + "X" + args[0] + ") " + args[1] + " times = " + ( (double) multt / 1000) + " s");
+		
+		//determinant
+		long delt = pt.det().process(inputs, outputs, numTrials);
+		System.out.println("La4j matrix (" + args[0] + "X" + args[0] + ") " + args[1] + " times = " + ( (double) delt / 1000) + " s");
+		
+		//Eigenvalue Decomposition
+		TestMatrix[] eiginputs = new La4jTestMatrix[1];
+		TestMatrix[] eigoutputs = new La4jTestMatrix[2];
+		long eigt = pt.eigSymm().process(eiginputs, eigoutputs, numTrials);
+		System.out.println("La4j matrix (" + args[0] + "X" + args[0] + ") " + args[1] + " times = " + ( (double) eigt / 1000) + " s");
 		
 	}
 
