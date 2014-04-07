@@ -11,9 +11,12 @@ import java.util.Random;
 
 public class La4jPerformanceTestV3 {
 	
-	public static void main(String args[]) throws Exception {
+	public static void main(String args[]) throws IOException {
+		int size = Integer.parseInt(args[0]);
+		long numTrials = Integer.parseInt(args[1]);
+		
 		Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
-				   .shape(2,2) // 10x10 matrix
+				   .shape(size,size) // 10x10 matrix
 				   .source(new Random())
 				   .buildSymmetric();
 		
@@ -24,7 +27,7 @@ public class La4jPerformanceTestV3 {
 		inputs[0] =	new La4jTestMatrix(a);
 		
 		Matrix b = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
-				   .shape(2,2) // 10x10 matrix
+				   .shape(size,size) // 10x10 matrix
 				   .source(new Random())
 				   .buildSymmetric();
 		
@@ -34,12 +37,11 @@ public class La4jPerformanceTestV3 {
 		inputs[1] =	new La4jTestMatrix(b);
 		
 		TestMatrix[] outputs = new La4jTestMatrix[1];
-		//long numTrials = 0;
 		
 		PerformanceTest pt = new PerformanceTest();
-		long t = pt.add().process(inputs, outputs, 1000);
+		long t = pt.add().process(inputs, outputs, numTrials);
 		
-		System.out.println("la4j matrix sum = " + ( (double) t / 1000) + " s");
+		System.out.println("La4j matrix (" + args[0] + "X" + args[0] + ") " + args[1] + " times = " + ( (double) t / 1000) + " s");
 		
 	}
 

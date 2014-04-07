@@ -37,7 +37,7 @@ public class La4jPerformanceTestV2 {
 		}
 	//}
 
-	public static void main(String args[]) throws Exception {
+	public static void main(String args[]) throws IOException {
 			Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
 					   .shape(2,2) // 10x10 matrix
 					   .source(new Random())
