@@ -9,23 +9,16 @@
  */
 package performancetest;
 
-import org.la4j.matrix.Matrix;
-import org.la4j.vector.Vector;
+import no.uib.cipr.matrix.Matrix;
+import no.uib.cipr.matrix.Matrices;
+import no.uib.cipr.matrix.Vector;
 
 
-public class La4jTestMatrix implements TestMatrix  {
+public class MtjTestMatrix implements TestMatrix  {
 
     Matrix matrix;
-
-    public static Vector toVector(Matrix m) {
-        return m.toColumnVector();
-    }
-
-    public static Matrix toMatrix(Vector v) {
-        return v.toColumnMatrix();
-    }
     
-    public La4jTestMatrix(Matrix matrix) {
+    public MtjTestMatrix(Matrix matrix) {
         this.matrix = matrix;
     }
 
@@ -40,17 +33,19 @@ public class La4jTestMatrix implements TestMatrix  {
     }
 
     @Override
-    public int numRows() {
-        return matrix.rows();
-    }
-
-    @Override
-    public int numCols() {
-        return matrix.columns();
-    }
-
-    @Override
     public <T> T getOriginal() {
         return (T)matrix;
     }
+
+	@Override
+	public int numRows() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int numCols() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

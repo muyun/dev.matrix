@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Random;
 
 
-public class La4jPerformanceTestV3 {
+public class La4jPerformanceTestV4 {
 	
 	public static void main(String args[]) throws IOException {
 		int size = Integer.parseInt(args[0]);

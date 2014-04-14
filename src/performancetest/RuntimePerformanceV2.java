@@ -11,7 +11,7 @@
 package performancetest;
 
 
-public interface RuntimePerformance {
+public interface RuntimePerformanceV2 {
 
     /**
      * Cholesky decomposition
@@ -27,12 +27,12 @@ public interface RuntimePerformance {
     /**
      * Eigenvalue Decomposition
      */
-	MatrixProcessorInterface eigSymm();
+	//MatrixProcessorInterface eigSymm();
 
     /**
      * Computes the determinant of a matrix.
      */
-	MatrixProcessorInterface det();
+	//MatrixProcessorInterface det();
 
     /**
      * <p>
@@ -50,7 +50,7 @@ public interface RuntimePerformance {
      * C = A*B
      * </p>
      */
-	MatrixProcessorInterface mult();
+	//MatrixProcessorInterface mult();
 
     /**
      * <p>
@@ -91,11 +91,11 @@ public interface RuntimePerformance {
     /**
      * Matrix transpose
      */
-	MatrixProcessorInterface transpose();
+	//MatrixProcessorInterface transpose();
 	
 	/**
 	 * SVD
 	 */
-    MatrixProcessorInterface svd();
+   // MatrixProcessorInterface svd();
 }
 

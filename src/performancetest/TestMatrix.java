@@ -4,6 +4,7 @@ package performancetest;
  * A generic interface used to setup matrices.
  *
  * @author wenlong
+ * 
  */
 public interface TestMatrix {
 

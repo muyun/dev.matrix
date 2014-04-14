@@ -1,17 +1,23 @@
+/**
+ * Copyright (c) 2014, Hong Kong Creative & Technology Limited. All Rights Reserved.
+ * 
+ * @author Vladimir Kostyukov
+ * updated by wenlong
+ * 
+ */
 package performancetest;
-
-//author@ wenlong
 
 import org.la4j.LinearAlgebra;
 import org.la4j.decomposition.MatrixDecompositor;
-import org.la4j.matrix.Matrices;
+//import org.la4j.matrix.Matrices;
 import org.la4j.matrix.Matrix;
 //import org.la4j.LinearAlgebra;
 
 //import java.io.IOException;
 
-public class PerformanceTest implements RuntimePerformance {
+public class La4jRuntimePerformance implements RuntimePerformance {
 	
+	//Matrix addition
 	@Override
 	public MatrixProcessorInterface add(){
 		return new Add();
@@ -40,6 +46,7 @@ public class PerformanceTest implements RuntimePerformance {
 		}
 	}
 	
+	//Matrix multiplication
     @Override
     public MatrixProcessorInterface mult() {
         return new Mult();
@@ -67,6 +74,7 @@ public class PerformanceTest implements RuntimePerformance {
         }
     }
     
+    //the determinant of a matrix
     @Override
     public MatrixProcessorInterface det() {
         return new Det();
@@ -88,6 +96,34 @@ public class PerformanceTest implements RuntimePerformance {
         }
     }
 	
+    //Matrix transpose
+    @Override
+    public MatrixProcessorInterface transpose() {
+        return new Transpose();
+    }
+
+    public static class Transpose implements MatrixProcessorInterface {
+        @Override
+        public long process(TestMatrix[] inputs, TestMatrix[] outputs, long numTrials) {
+            Matrix a = inputs[0].getOriginal();
+
+            Matrix B = null;
+
+            long prev = System.currentTimeMillis();
+
+            for( long i = 0; i < numTrials; i++ ) {
+                B = a.transpose();
+            }
+
+            long elapsed = System.currentTimeMillis()- prev;
+            outputs[0] = new La4jTestMatrix(B);
+            
+            System.out.println("La4j Matrix transpose:");
+            return elapsed;
+        }
+    }
+    
+    //Eigenvalue Decomposition
     @Override
     public MatrixProcessorInterface eigSymm() {
         return new Eig();
@@ -111,15 +147,67 @@ public class PerformanceTest implements RuntimePerformance {
             }
 
             long elapsed = System.currentTimeMillis() - prev;
+             
             outputs[0] = new La4jTestMatrix(D);
             outputs[1] = new La4jTestMatrix(V);
             
             System.out.println("La4j Eigenvalue Decomposition:");
+            String strd = D.mkString(";", ",");
+            String strv = V.mkString(";", ",");
+            System.out.println("Matrix D is:" + strd);
+            System.out.println("Matrix V is:" + strv);
+            
             return elapsed;
         }
     }
     
-    
+    //
+    @Override
+    public MatrixProcessorInterface svd() {
+        return new SVD();
+    }
+
+    public static class SVD implements MatrixProcessorInterface {
+        @Override
+        public long process(TestMatrix[] inputs, TestMatrix[] outputs, long numTrials) {
+            Matrix a = inputs[0].getOriginal();
+
+            Matrix U = null;
+            Matrix S = null;
+            Matrix V = null;
+
+            long prev = System.currentTimeMillis();
+
+            for( long i = 0; i < numTrials; i++ ) {
+                MatrixDecompositor decompositor = a.withDecompositor(LinearAlgebra.SVD);
+                Matrix usv[] = decompositor.decompose();
+                U = usv[0];
+                S = usv[1];
+                V = usv[2];
+            }
+
+            long elapsed = System.currentTimeMillis() - prev;
+
+            outputs[0] = new La4jTestMatrix(U);
+            outputs[1] = new La4jTestMatrix(S);
+            outputs[2] = new La4jTestMatrix(V);
+
+            
+            //String strb = .mkString(";", ",");
+            
+            System.out.println("La4j SVD:");
+            
+            String stru = U.mkString(";", ",");
+            String strs = S.mkString(";", ",");
+            String strv = V.mkString(";", ",");
+            System.out.println("Matrix U is:" + stru);
+            System.out.println("Matrix S is:" + strs);
+            System.out.println("Matrix V is:" + strv);
+            
+            return elapsed;
+        }
+    }
+      
 	/*
 	public static void main(String args[]) throws Exception {
 		Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)

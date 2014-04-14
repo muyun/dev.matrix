@@ -1,6 +1,10 @@
+/**
+ * Copyright (c) 2014, Hong Kong Creative & Technology Limited. All Rights Reserved.
+ * 
+ * @author wenlong
+ */
 package performancetest;
 
-//author@ wenlong
 import org.la4j.matrix.Matrices;
 import org.la4j.matrix.Matrix;
 import org.la4j.LinearAlgebra;
@@ -10,14 +14,12 @@ import java.util.Random;
 
 public class La4jPerformanceTestV2 {
 	/*
-	@Override
 	public MatrixProcessorInterface add(){
 		return new Add();
 	}
 	*/
 	
 	//public static class Add implements MatrixProcessorInterface {
-	//	@Override
 		public static long process(TestMatrix[] inputs, TestMatrix[] outputs, long numTrials){
 			Matrix a = inputs[0].getOriginal();
 			Matrix b = inputs[1].getOriginal();

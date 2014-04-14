@@ -1,6 +1,11 @@
+/**
+ * Copyright (c) 2014, Hong Kong Creative & Technology Limited. All Rights Reserved.
+ * 
+ * @author wenlong
+ */
+
 package performancetest;
 
-//author@ wenlong
 import org.la4j.matrix.Matrices;
 import org.la4j.matrix.Matrix;
 import org.la4j.LinearAlgebra;
@@ -8,9 +13,7 @@ import org.la4j.LinearAlgebra;
 import java.io.IOException;
 import java.util.Random;
 
-public class La4jPerformanceTest {
-	//public static final int SIZE = 10;
-	
+public class La4jPerformanceTest {	
 	public static void matrixOperations() {
 		// data initialization
 		Matrix a = Matrices.asBuilder(LinearAlgebra.BASIC2D_FACTORY)
@@ -40,7 +43,7 @@ public class La4jPerformanceTest {
 		
 	}
 	
-	public static void main(String args[]) throws Exception {
+	public static void main(String args[]) throws IOException {
 		matrixOperations();
 	}
 
