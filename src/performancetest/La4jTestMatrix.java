@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014, Hong Kong Creative & Technology Limited. All Rights Reserved.
+ * Copyright (c) 2014. All Rights Reserved.
  * 
  * @author Peter Abeles
  * @author Vladimir Kostyukov
