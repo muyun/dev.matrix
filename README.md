@@ -1,4 +1,4 @@
 dev.performancetest
 ===================
 
-matrix performance test
+matrix performance test in terms of speed and memory
