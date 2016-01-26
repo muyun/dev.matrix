@@ -1,4 +1,4 @@
-dev.performancetest
+dev.matrix
 ===================
 
-matrix performance test in terms of speed and memory
+Java matrix lib performance test in terms of speed and memory
